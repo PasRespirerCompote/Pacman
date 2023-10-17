@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X_UA_COMPATIBLE" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pacman</title>
+</head>
+<body style="margin: 0px; background-color: black; overflow-y: hidden; overflow-x: hidden">
+    <div id="menu" style="text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, 50%); display: block">
+        <h1>Welcome to Pacman</h1>
+        <button id="startButton">New Game</button>
+    </div>
+    <canvas id="canvas" width="500" height="500" style="display: none"></canvas>
+    <div style="display: none">
+        <img id="animations" src="../assets/animations.gif" alt="">
+        <img id="ghosts" src="../assets/ghost.png" alt="">
+    </div>
+
+    <script src="ghost.js"></script>
+    <script src="pacman.js"></script>
+    <script src="game.js"></script>
+    <script>
+        const menu = document.getElementById("menu");
+        const can = document.getElementById("canvas");
+        const startButton = document.getElementById("startButton");
+
+        startButton.addEventListener("click", () => {
+            menu.style.display = "none";
+            can.style.display = "block";
+            startGame();
+        });
+    </script>
+</body>
+</html>
