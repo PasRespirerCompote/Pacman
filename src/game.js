@@ -124,12 +124,14 @@ let restartGame = () => {
 
 let gameOver = () => {
     clearInterval(gameInterval);
-    drawGameOver();
+    openGameOverMenu();
 };
 
 
 let draw = () => {
-    createRect(0,0, canvas.width, canvas.height, "black");
+    //createRect(0,0, canvas.width, canvas.height, "black");
+    canvasContext.fillStyle = "rgba(0, 0, 0, 0)";
+    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
     drawWalls();
     drawFood();
     pacman.draw();

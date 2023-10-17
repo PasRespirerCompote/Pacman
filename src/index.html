@@ -8,29 +8,36 @@
     <title>Pacman</title>
 </head>
 <body style="margin: 0px; background-color: black; overflow-y: hidden; overflow-x: hidden">
-    <div id="menu" class="pacman-menu">
-        <h1>Welcome to Pacman</h1>
-        <button id="startButton" class="start-button">New Game</button>
+    <ul id="menu" class="pacman-menu">
+        <li><h1>Welcome to Pacman</h1>
+        <li><button id="startButton" class="menu-button">New Game</button></li>
+        <li><button id="highscoresButton" class="menu-button">Highscores</button></li>
+        <li><button id="optionsButton" class="menu-button">Options</button></li>
+        <li><button id="quitButton" class="menu-button">Quit</button></li>
+        <li><img src="../assets/pacman.jpg" alt="Image Alt Text" style="width: 100%; height: auto"></li>
+    </ul>
+
+    <div id="canvas-container">
+        <canvas id="canvas" width="500" height="500"></canvas>
     </div>
-    <canvas id="canvas" width="500" height="500" style="display: none"></canvas>
     <div style="display: none">
         <img id="animations" src="../assets/animations.gif" alt="">
         <img id="ghosts" src="../assets/ghost.png" alt="">
     </div>
 
+    <div id="game-over-menu" class="game-over-menu" style="display: none">
+        <h2>GAME OVER!</h2>
+        <p>Your game is over. Would you like to play again?</p>
+        <button id="play-again-button" class="menu-button">Play Again</button>
+    </div>
+
     <script src="ghost.js"></script>
     <script src="pacman.js"></script>
     <script src="game.js"></script>
-    <script>
-        const menu = document.getElementById("menu");
-        const can = document.getElementById("canvas");
-        const startButton = document.getElementById("startButton");
+    <script src="menu.js">
 
-        startButton.addEventListener("click", () => {
-            menu.style.display = "none";
-            can.style.display = "block";
-            startGame();
-        });
+
+
     </script>
 </body>
 </html>
