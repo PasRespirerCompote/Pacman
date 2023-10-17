@@ -14,7 +14,7 @@ body {
 }
 
 
-.pacman-menu {
+.menu {
     text-align: center;
     position: absolute;
     top: 50%;
@@ -32,16 +32,16 @@ body {
     background-color: transparent;
 }
 
-#menu {
+.menu {
     list-style: none;
     padding: 0;
 }
 
-#menu li {
+.menu li {
     margin: 10px 0;
 }
 
-#menu li h1 {
+.menu li h1{
     font-size: 32px;
     color: #fff;
 }
@@ -64,7 +64,6 @@ body {
 
 
 .game-over-menu {
-    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -76,6 +75,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+.game-over-menu li {
+    margin: 10px 0;
 }
 
 .game-over-menu h2 {
@@ -86,5 +91,40 @@ body {
 .game-over-menu p {
     color: white;
     font-size: 24px;
+}
+
+
+#high-scores-menu h2 {
+    font-size: 24px;
+    color: #ffc04d;
+    margin-bottom: 10px;
+}
+
+#high-scores-list {
+    list-style-type: decimal;
+    padding-left: 20px;
+}
+
+#high-scores-list li {
+    font-size: 18px;
+    margin: 5px 0;
+    color: #ffc04d;
+}
+
+
+.main-menu-button {
+    background: #ffc04d;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+
+.main-menu-button:hover {
+    background-color: #ffe872;
 }
 

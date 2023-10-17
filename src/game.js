@@ -40,6 +40,7 @@ let map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
+let highscores = [];
 
 let fps = 30;
 let gameInterval;
@@ -83,8 +84,39 @@ let randomGhostTargets = [
 
 
 let startGame = () => {
+    map = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
+        [1, 1, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 1, 1],
+        [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    ];
+    drawFood();
+
+    lives = 3;
+    score = 0;
+
     pacman = createNewPacman();
     createGhosts();
+    
     let gameLoop = () => {
         update();
     };
@@ -124,6 +156,7 @@ let restartGame = () => {
 
 let gameOver = () => {
     clearInterval(gameInterval);
+    drawLives();
     openGameOverMenu();
 };
 
@@ -245,13 +278,6 @@ let drawLives = () => {
 };
 
 
-let drawGameOver = () => {
-    canvasContext.font = "60px Emu-logic";
-    canvasContext.fillStyle = "white";
-    canvasContext.fillText("GAME OVER!", 100, 200);
-};
-
-
 let drawWin = () => {
     canvasContext.font = "60px Emu-logic";
     canvasContext.fillStyle = "white";
@@ -309,19 +335,23 @@ window.addEventListener("keydown", (event) => {
     setTimeout(() => {
         switch (k) {
             case "ArrowLeft":
+            case "A":
             case "a": // Left
                 pacman.nextDirection = DIR_LEFT;
                 break;
             case "ArrowUp":
+            case "W":
             case "w": // Up
                 pacman.nextDirection = DIR_UP;
                 break;
             case "ArrowRight":
+            case "D":
             case "d": // Right
                 pacman.nextDirection = DIR_RIGHT;
                 break;
             case "ArrowDown":
-            case "s":// Bottom
+            case "S":
+            case "s": // Bottom
                 pacman.nextDirection = DIR_BOTTOM;
                 break;
         }
@@ -330,32 +360,10 @@ window.addEventListener("keydown", (event) => {
 
 
 window.addEventListener("load", () => {
-    const menu = document.getElementById("menu");
+    const menu = document.getElementById("pacman-menu");
     menu.style.display = "block";
 });
 
-/*
-document.getElementById("restartButton").addEventListener("click", () => {
-    restartGame();
-    toggleMenu(false);
-});
-
-document.getElementById("highscoresButton").addEventListener("click", () => {
-    showHighscores();
-    toggleMenu(false);
-});
-
-document.getElementById("quitButton").addEventListener("click", () => {
-    quitGame();
-    toggleMenu(false);
-});
-
-
-document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" || event.key === "Echap")
-        toggleMenu(true);
-});
-*/
 pacman = createNewPacman();
 createGhosts();
 //gameLoop();
