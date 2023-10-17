@@ -1,6 +1,6 @@
 // ----------------------------------------- Start Menu
 const menu = document.getElementById("pacman-menu");
-const can = document.getElementById("canvas");
+const can = document.getElementById("canvas-container");
 
 // New Game
 const startButton = document.getElementById("startButton");

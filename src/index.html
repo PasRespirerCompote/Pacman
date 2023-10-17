@@ -13,14 +13,18 @@
         <li><h1>Welcome to Pacman</h1>
         <li><button id="startButton" class="menu-button">New Game</button></li>
         <li><button id="highscoresButton" class="menu-button">Highscores</button></li>
-        <li><button id="optionsButton" class="menu-button">Options</button></li>
-        <li><button id="quitButton" class="menu-button">Quit</button></li>
+        <li><button class="options-button">Options</button></li>
+        <li><button id="quit-button" class="menu-button">Quit</button></li>
         <li><img src="../assets/pacman.jpg" alt="Image Alt Text" style="width: 100%; height: auto"></li>
     </ul>
 
 <!--Game-->
-    <div id="canvas-container">
+    <div id="canvas-container" style="display: none;">
         <canvas id="canvas" width="500" height="500"></canvas>
+        <div id="buttons-container">
+            <button class="options-button">Options</button>
+            <button class="main-menu-button">Main Menu</button>
+        </div>
     </div>
 
     <div style="display: none">

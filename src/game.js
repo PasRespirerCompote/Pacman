@@ -116,7 +116,7 @@ let startGame = () => {
 
     pacman = createNewPacman();
     createGhosts();
-    
+
     let gameLoop = () => {
         update();
     };
@@ -162,7 +162,7 @@ let gameOver = () => {
 
 
 let draw = () => {
-    //createRect(0,0, canvas.width, canvas.height, "black");
+    // createRect(0,0, canvas.width, canvas.height, "black");
     canvasContext.fillStyle = "rgba(0, 0, 0, 0)";
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
     drawWalls();
