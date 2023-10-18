@@ -28,10 +28,6 @@ body {
     width: 300px;
 }
 
-#canvas-container {
-    background-color: transparent;
-}
-
 .menu {
     list-style: none;
     padding: 0;
@@ -148,6 +144,7 @@ body {
 
 #canvas-container {
     display: flex;
+    background-color: black;
 }
 
 #buttons-container {

@@ -9,6 +9,13 @@ let createRect = (x, y, width, height, color) => {
     canvasContext.fillRect(x, y, width, height);
 };
 
+let createCircle = (x, y, radius, startAngle, endAngle, color) => {
+    canvasContext.fillStyle = color;
+    canvasContext.beginPath();
+    canvasContext.arc(x + 3, y + 3, radius, startAngle, endAngle, false);
+    canvasContext.fill();
+};
+
 let pacman;
 
 // 0 = empty
@@ -138,8 +145,10 @@ let update = () => {
         restartGame();
     }
 
-    if (score >= foodCount)
-        drawWin();
+    if (score >= 10000)
+        lives++;
+
+    // Score/win
 };
 
 
@@ -162,9 +171,9 @@ let gameOver = () => {
 
 
 let draw = () => {
-    // createRect(0,0, canvas.width, canvas.height, "black");
-    canvasContext.fillStyle = "rgba(0, 0, 0, 0)";
-    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+    createRect(0,0, canvas.width, canvas.height, "black");
+    // canvasContext.fillStyle = "rgba(0, 0, 0, 0)";
+    // canvasContext.clearRect(0, 0, canvas.width, canvas.height);
     drawWalls();
     drawFood();
     pacman.draw();
@@ -206,7 +215,6 @@ let drawWalls = () => {
                     );
                 }
 
-
                 if (i > 0 && map[i - 1][j] === 1) {
                     createRect(
                         j * blockSize + wallOffset,
@@ -236,11 +244,12 @@ let drawFood = () => {
     for (let i = 0; i < map.length; i++) {
         for (let j = 0; j < map[0].length; j++) {
             if (map[i][j] === 2) {
-                createRect(
+                createCircle(
                     j * blockSize + blockSize / 3,
                     i * blockSize + blockSize / 3,
-                    blockSize / 3,
-                    blockSize / 3,
+                    blockSize / 6,
+                    0,
+                    360,
                     foodColor
                 );
             }
@@ -316,19 +325,6 @@ let createGhosts = () => {
     return ghosts;
 };
 
-/*
-let toggleMenu = (show) => {
-    const menu = document.getElementById("menu");
-    if (show) {
-        menu.style.display = "block";
-        document.removeEventListener("keydown", handleKeyPressed);
-    }
-    else {
-        menu.style.display = "none";
-        document.addEventListener("keydown", handleKeyPressed);
-    }
-};
-*/
 
 window.addEventListener("keydown", (event) => {
     let k = event.key;

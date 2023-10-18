@@ -10,9 +10,11 @@ class Pacman {
         this.currentFrame = 1;
         this.frameCount = 7;
 
+        let timeout = 80 - this.currentFrame * 10;
+
         setInterval(() => {
             this.changeAnimation();
-        }, 50);
+        }, timeout);
     }
 
 
@@ -32,7 +34,7 @@ class Pacman {
                     this.getMapY() === i
                 ) {
                     map[i][j] = 0;
-                    score++;
+                    score += 10;
                 }
             }
         }
